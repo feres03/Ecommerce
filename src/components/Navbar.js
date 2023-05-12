@@ -1,7 +1,8 @@
-import { faBars, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faRightToBracket, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Link } from 'react-router-dom'
+
 
 const Navbar = ({ openSideBar }) => {
   return (
@@ -18,10 +19,24 @@ const Navbar = ({ openSideBar }) => {
               <Link className="nav-link" aria-current="page" to='/'>Home</Link>
             </li> */}
           </ul>
-          <Link to='/login'><FontAwesomeIcon color='lightblue' icon={faUser} className='mx-2' /></Link>
-          <Link to='/'><FontAwesomeIcon color='lightblue' icon={faShoppingCart} className='mx-2' /></Link>
-
-
+          <div className='dropdown' >
+            <h6 className='mx-2 my-2' style={{ color: 'white' }} >Welcome!</h6>
+          </div>
+          <div className="dropdown me-5">
+            <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Account
+            </button>
+            <ul className="dropdown-menu dropdown-menu-dark">
+              <li className="dropdown-item">
+                <Link to='/login'><FontAwesomeIcon color='lightblue' icon={faUser} /><span className='ms-2'>Log-in</span></Link>
+              </li>
+              <li className="dropdown-item">
+                <Link to='/'><FontAwesomeIcon color='lightblue' icon={faRightToBracket} /><span className='ms-2'>Log-out</span></Link>
+              </li>
+            </ul>
+          </div>
+          {/* <Link to='/login'><FontAwesomeIcon color='lightblue' icon={faUser} className='mx-2' /></Link> */}
+          {/* <Link to='/'><FontAwesomeIcon color='lightblue' icon={faRightToBracket} className='mx-2' /></Link> */}
         </div>
       </div>
     </nav>

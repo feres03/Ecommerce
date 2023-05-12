@@ -1,40 +1,47 @@
-import {lazy} from "react"
+import { lazy } from "react"
 const Home = lazy(() => import('./components/Home'))
-const CreateProduct = lazy(()=> import('./components/Pages/Product/CreateProduct'))
-const ListProduct = lazy(()=> import('./components/Pages/Product/ListProduct'))
-const ListCategory = lazy(()=> import('./components/Pages/Category/ListCategory'))
-const CreateCategory = lazy(()=> import('./components/Pages/Category/CreateCategory'))
+const CreateProduct = lazy(() => import('./components/Pages/Product/CreateProduct'))
+const ListProduct = lazy(() => import('./components/Pages/Product/ListProduct'))
+const ListCategory = lazy(() => import('./components/Pages/Category/ListCategory'))
+const CreateCategory = lazy(() => import('./components/Pages/Category/CreateCategory'))
+const UpdateCategory = lazy(() => import('./components/Pages/Category/UpdateCategory'))
 const routes = [
     {
         path: '/',
         element: Home,
-        name:'Home',
+        name: 'Home',
         exact: true
     },
     {
         path: '/products/add',
         element: CreateProduct,
-        name:'Create-product',
+        name: 'Create-product',
         exact: true
     },
     {
         path: '/products',
         element: ListProduct,
-        name:'Products',
+        name: 'Products',
         exact: true
     },
     {
         path: '/categories/add',
         element: CreateCategory,
-        name:'Categories',
+        name: 'Categories',
         exact: true
     },
     {
         path: '/categories',
         element: ListCategory,
-        name:'Home',
+        name: 'Home',
         exact: true
     },
+    {
+        path: `/UpdateCategory/:id`,
+        element: UpdateCategory,
+        name: 'update',
+        exact: true
+    }
 
 ]
 
