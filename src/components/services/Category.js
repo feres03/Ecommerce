@@ -5,6 +5,9 @@ const addCategory = (data) => {
 const ListCategory = () => {
     return http.get('/category')
 }
+const ListCategoryForProduct = () => {
+    return http.get('/categoryForProduct')
+}
 const deleteCategory = (id) => {
     return http.delete(`/category/${id}`)
 }
@@ -20,6 +23,7 @@ const Category = {
     ListCategory,
     deleteCategory,
     getCategoryById,
-    updateCategory
+    updateCategory,
+    ListCategoryForProduct
 }
 export default Category

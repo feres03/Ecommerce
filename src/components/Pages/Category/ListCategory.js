@@ -26,15 +26,14 @@ const ListCategory = () => {
           <tr>
             <th>Name</th>
             <th>Description</th>
-            <th>Update</th>
-            <th>Delete</th>
+            <th>Actions</th>
+
 
           </tr>
         </thead>
         <tbody>
           {
             categories.map((category, index) => {
-              console.log(category._id)
               return (
                 <tr key={index}>
                   <td>
@@ -43,10 +42,8 @@ const ListCategory = () => {
                   <td>
                     {category.description}
                   </td>
-                  <td>
-                    <Link to={`/UpdateCategory/${category._id}`} className='btn btn-success'>Update</Link>
-                  </td>
-                  <td>
+                  <td >
+                    <Link to={`/UpdateCategory/${category._id}`} className='btn btn-success me-2'>Update</Link>
                     <button className='btn btn-danger' onClick={() => { handleDelete(category._id) }}>Delete</button>
                   </td>
                 </tr>

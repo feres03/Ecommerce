@@ -1,22 +1,39 @@
 import { Formik } from 'formik';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Product from '../../services/Product';
 import { toast } from 'react-toastify';
+import Select from 'react-select';
+import Category from '../../services/Category';
+
 
 function AddProduct() {
   const navigate = useNavigate();
   const [image, setImage] = useState(null);
+  const [options, setOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const onFileSelect = (e) => {
     console.log(e.target.files[0]);
     setImage(e.target.files[0])
   };
+  const handleChangeCategories = (e) => {
+    setSelectedOptions(e)
+  }
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categories = await Category.ListCategoryForProduct()
+      setOptions(categories.data)
+      console.log(categories);
+    }
+    fetchCategories()
+  }, [])
   return (
     <div className='container mt-5'>
       <h3 className='text-center text-secondary'>Add Product</h3>
       <div className="row  d-flex justify-content-center">
         <Formik
-          initialValues={{ name: '', disponibility: '', brand: '', description: '', category: '', quantity: '', price: '' }}
+          initialValues={{ name: '', disponibility: '', brand: '', description: '', quantity: '', price: '' }}
           validate={values => {
             const errors = {};
             if (!values.name) {
@@ -31,9 +48,6 @@ function AddProduct() {
             if (!values.description) {
               errors.description = 'Ce champs est obligatoire.'
             }
-            if (!values.category) {
-              errors.category = 'Ce champs est obligatoire.'
-            }
             if (!values.quantity) {
               errors.quantity = 'Ce champs est obligatoire.'
             }
@@ -46,24 +60,26 @@ function AddProduct() {
             else if (values.price <= 0) {
               errors.price = 'Le prix doit etre positif'
             }
-
             return errors;
           }}
           onSubmit={async (values, { setSubmitting }) => {
             try {
               console.log(values)
+              let opt = []
+              selectedOptions.map((e) => {
+                return opt.push(e.value)
+              })
               let formData = new FormData();
               formData.append('name', values.name);
               formData.append('disponibility', values.disponibility);
               formData.append('brand', values.brand);
               formData.append('description', values.description);
-              formData.append('category', values.category);
+              formData.append('category', opt);
               formData.append('quantity', values.quantity);
               formData.append('price', values.price);
               formData.append('Image', image, image.name);
 
               const response = await Product.addProduct(formData)
-              console.log(response)
               toast.success(response.data.message)
               navigate('/products')
             } catch (error) {
@@ -133,18 +149,18 @@ function AddProduct() {
                   type="file" />
               </div>
 
-              <div className="mb-3">
-                <input type="text" className="form-control"
-                  name="category"
-                  placeholder='Category'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.category} id="category" />
-              </div>
-              {errors.category && touched.category && <div className="alert alert-danger" role="alert">{errors.category} </div>}
+              {/* Select category using React-select */}
+              <Select className='mb-3'
+                placeholder='Category'
+                options={options}
+                onChange={handleChangeCategories}
+                isSearchable
+                value={selectedOptions}
+                isMulti
+              />
+
 
               <div className="mb-3">
-
                 <input type="number" className="form-control"
                   placeholder='Quantity'
                   name="quantity"

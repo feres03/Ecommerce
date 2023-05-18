@@ -5,6 +5,8 @@ const ListProduct = lazy(() => import('./components/Pages/Product/ListProduct'))
 const ListCategory = lazy(() => import('./components/Pages/Category/ListCategory'))
 const CreateCategory = lazy(() => import('./components/Pages/Category/CreateCategory'))
 const UpdateCategory = lazy(() => import('./components/Pages/Category/UpdateCategory'))
+const UpdateProduct = lazy(() => import('./components/Pages/Product/UpdateProduct'))
+
 const routes = [
     {
         path: '/',
@@ -39,6 +41,12 @@ const routes = [
     {
         path: `/UpdateCategory/:id`,
         element: UpdateCategory,
+        name: 'update',
+        exact: true
+    },
+    {
+        path: `/UpdateProduct/:id`,
+        element: UpdateProduct,
         name: 'update',
         exact: true
     }

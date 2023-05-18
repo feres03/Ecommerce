@@ -4,19 +4,27 @@ import http from '../../utils/http'
 const addProduct = (data) => {
     return http.post('/product', data)
 }
-const getProduct = (data) => {
-    return http.get = ('/product', data)
+const ListProducts = () => {
+    return http.get('/product')
 }
-// const deleteProduct = (data) => {
-//     return http.delete('/product/:id', data)
-// }
+const getProductById = (id) => {
+    return http.get(`/product/${id}`)
+}
+const updateProduct = (id, data) => {
+    return http.put(`/product/${id}`, data)
+}
+const deleteProduct = (id) => {
+    return http.delete(`/product/${id}`)
+}
 
 
 
 const Product = {
     addProduct,
-    getProduct,
-    // deleteProduct
+    ListProducts,
+    getProductById,
+    updateProduct,
+    deleteProduct
 
 }
 export default Product
