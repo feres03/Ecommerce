@@ -1,13 +1,18 @@
-import { faBars, faRightToBracket, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 const Navbar = ({ openSideBar }) => {
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.clear();
+    navigate('/login')
+  }
   return (
     <nav className="navbar navbar-expand-lg bg-nav px-1" >
-      <div className="container-fluid">
+      <div className="container-fluid dashboard">
         <button onClick={openSideBar} className='btn' ><FontAwesomeIcon color='lightblue' icon={faBars} /></button>
         <Link className="navbar-brand ms-3" to='/'>Dashboard</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,15 +33,10 @@ const Navbar = ({ openSideBar }) => {
             </button>
             <ul className="dropdown-menu dropdown-menu-dark">
               <li className="dropdown-item">
-                <Link to='/login'><FontAwesomeIcon color='lightblue' icon={faUser} /><span className='ms-2'>Log-in</span></Link>
-              </li>
-              <li className="dropdown-item">
-                <Link to='/'><FontAwesomeIcon color='lightblue' icon={faRightToBracket} /><span className='ms-2'>Log-out</span></Link>
+                <Link onClick={logout} to='/login'><FontAwesomeIcon color='lightblue' icon={faRightToBracket} /><span className='ms-2'>Log-out</span></Link>
               </li>
             </ul>
           </div>
-          {/* <Link to='/login'><FontAwesomeIcon color='lightblue' icon={faUser} className='mx-2' /></Link> */}
-          {/* <Link to='/'><FontAwesomeIcon color='lightblue' icon={faRightToBracket} className='mx-2' /></Link> */}
         </div>
       </div>
     </nav>

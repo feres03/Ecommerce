@@ -13,7 +13,6 @@ function AddProduct() {
   const [options, setOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const onFileSelect = (e) => {
-    console.log(e.target.files[0]);
     setImage(e.target.files[0])
   };
   const handleChangeCategories = (e) => {
@@ -24,7 +23,6 @@ function AddProduct() {
     const fetchCategories = async () => {
       const categories = await Category.ListCategoryForProduct()
       setOptions(categories.data)
-      console.log(categories);
     }
     fetchCategories()
   }, [])
@@ -64,19 +62,16 @@ function AddProduct() {
           }}
           onSubmit={async (values, { setSubmitting }) => {
             try {
-              console.log(values)
               let opt = []
               selectedOptions.map((e) => {
                 return opt.push(e.value)
               })
+
               let formData = new FormData();
-              formData.append('name', values.name);
-              formData.append('disponibility', values.disponibility);
-              formData.append('brand', values.brand);
-              formData.append('description', values.description);
-              formData.append('category', opt);
-              formData.append('quantity', values.quantity);
-              formData.append('price', values.price);
+              Object.keys(values).forEach(fieldname => {
+                formData.append(fieldname, values[fieldname])
+              })
+              formData.append('category', opt)
               formData.append('Image', image, image.name);
 
               const response = await Product.addProduct(formData)

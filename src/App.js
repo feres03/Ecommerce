@@ -9,18 +9,16 @@ import {
 } from "react-router-dom";
 import React, { Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
-import routes from './routes'
+import { routesDashboard, routesClient } from './routes'
 import PrivateRoute from './privateRoute/PrivateRoute';
+import NotFound from './components/notFound';
+import LayoutClient from './ClientSide/LayoutClient';
 
 const Layout = React.lazy(() => import('./components/Layout'));
 const Login = React.lazy(() => import('./components/AuthComponents/Login'));
 const Register = React.lazy(() => import('./components/AuthComponents/Register'));
 const ForgotPassword = React.lazy(() => import('./components/AuthComponents/Forgotpassword'));
 const ResetPassword = React.lazy(() => import('./components/AuthComponents/ResetPassword'));
-
-
-
-
 
 
 
@@ -32,7 +30,18 @@ const Loading =
     </div>
   </div>
 
-const routing = routes.map((route) => {
+const routingDashboard = routesDashboard.map((route) => {
+  return (
+    route.element && {
+      path: route.path,
+      element: <route.element />,
+      exact: route.exact,
+      name: route.name
+    }
+  )
+})
+
+const routingClient = routesClient.map((route) => {
   return (
     route.element && {
       path: route.path,
@@ -61,9 +70,18 @@ const router = createBrowserRouter([
     element: <ResetPassword />,
   },
   {
-    path: '/',
+    path: '/admin',
     element: <PrivateRoute><Layout /></PrivateRoute>,
-    children: routing
+    children: routingDashboard
+  },
+  {
+    path: '/',
+    element: <LayoutClient />,
+    children: routingClient
+  }
+  , {
+    path: '*',
+    element: <NotFound />
   }
 
 ]);

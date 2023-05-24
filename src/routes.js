@@ -7,45 +7,49 @@ const CreateCategory = lazy(() => import('./components/Pages/Category/CreateCate
 const UpdateCategory = lazy(() => import('./components/Pages/Category/UpdateCategory'))
 const UpdateProduct = lazy(() => import('./components/Pages/Product/UpdateProduct'))
 
-const routes = [
+const HomeClient = lazy(() => import('./ClientSide/HomePage'))
+const ListProductClient = lazy(() => import('./ClientSide/ListProducts'))
+
+
+export const routesDashboard = [
     {
-        path: '/',
+        path: '/admin',
         element: Home,
         name: 'Home',
         exact: true
     },
     {
-        path: '/products/add',
+        path: '/admin/products/add',
         element: CreateProduct,
         name: 'Create-product',
         exact: true
     },
     {
-        path: '/products',
+        path: '/admin/products',
         element: ListProduct,
         name: 'Products',
         exact: true
     },
     {
-        path: '/categories/add',
+        path: '/admin/categories/add',
         element: CreateCategory,
         name: 'Categories',
         exact: true
     },
     {
-        path: '/categories',
+        path: '/admin/categories',
         element: ListCategory,
         name: 'Home',
         exact: true
     },
     {
-        path: `/UpdateCategory/:id`,
+        path: `/admin/UpdateCategory/:id`,
         element: UpdateCategory,
         name: 'update',
         exact: true
     },
     {
-        path: `/UpdateProduct/:id`,
+        path: `/admin/UpdateProduct/:id`,
         element: UpdateProduct,
         name: 'update',
         exact: true
@@ -53,4 +57,18 @@ const routes = [
 
 ]
 
-export default routes
+export const routesClient = [
+    {
+        path: '/',
+        element: HomeClient,
+        name: 'Home',
+        exact: true
+    },
+    {
+        path: '/list-product',
+        element: ListProductClient,
+        name: 'ListProductClient',
+        exact: true
+    },
+
+]

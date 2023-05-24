@@ -27,7 +27,7 @@ const Layout = () => {
                 open={sidebarOptions.sidebarOpen}
                 onSetOpen={onSetSidebarOpen}
                 docked={sidebarOptions.sidebarDocked}
-                styles={{ sidebar: { background: "#20232A", color:'white', minWidth: '230px' } }}
+                styles={{ sidebar: { background: "#20232A", color: 'white', minWidth: '230px' } }}
             >
                 <Navbar openSideBar={onSetSidebarOpen} />
                 <Outlet />

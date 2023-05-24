@@ -2,15 +2,15 @@
   text-align: center;
 }
 
-.bg-nav{
+.bg-nav {
   background: #3C4B64;
 }
 
-a{
+.dashboard a {
   color: white !important;
 }
 
-.sidebar-brand{
+.sidebar-brand {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,28 +20,36 @@ a{
   font-weight: 500;
   background-color: #3C4B64;
 }
-a{
-  text-decoration: none!important;
+
+a {
+  text-decoration: none !important;
 }
-.sidebar-ul{
+
+.sidebar-ul {
   padding: 0 !important;
   text-align: left;
   list-style-type: none;
 }
-.sidebar-link{
-  text-align: left!important;
-  padding: 10px 15px ;
+
+.sidebar-link {
+  text-align: left !important;
+  padding: 10px 15px;
   cursor: pointer;
   background-color: #20232A;
 }
-.sidebar-link:hover, .sidebar-link:active,.sidebar-link:focus {
+
+.sidebar-link:hover,
+.sidebar-link:active,
+.sidebar-link:focus {
   background-color: #3a3f49;
 }
-.sidebar-sub-link{
-  padding: 10px 35px ;
+
+.sidebar-sub-link {
+  padding: 10px 35px;
   cursor: pointer;
   background-color: #20232A;
 }
-.sidebar-sub-link:hover{
+
+.sidebar-sub-link:hover {
   background-color: #3a3f49;
 }
